@@ -1,3 +1,4 @@
+__version__ = 'dev'
 import numpy as np
 import random
 

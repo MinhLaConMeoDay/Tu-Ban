@@ -1,14 +1,14 @@
 from setuptools import setup
 
-from my_pip_package import __version__
+from meomeo import __version__
 
 setup(
-    name='my_pip_package',
-    version='dev',
+    name='meomeo',
+    version=__version__,
 
-    url='https://github.com/MichaelKim0407/tutorial-pip-package',
-    author='Michael Kim',
-    author_email='mkim0407@gmail.com',
+    url='https://github.com/MinhLaConMeoDay/Tu-Ban',
+    author='Những con mèo',
+    author_email='anhnh.t1.1821@gmail.com',
 
-    py_modules=['my_pip_package'],
+    py_modules=['meomeo'],
 )
