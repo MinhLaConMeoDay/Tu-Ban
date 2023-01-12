@@ -3,4 +3,5 @@ setup.py
 meomeo.egg-info/PKG-INFO
 meomeo.egg-info/SOURCES.txt
 meomeo.egg-info/dependency_links.txt
+meomeo.egg-info/requires.txt
 meomeo.egg-info/top_level.txt
