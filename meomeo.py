@@ -1,17 +1,19 @@
-__version__ = 'dev'
+__version__ = 1.1
 import numpy as np
 import random
+# from typing import
 
 
 class Ham_so:
 
     def __init__(self, difficulty=1):
+
         self.__meomeo = None
         self.__difficulty = difficulty
-        self.__y_min = None
-        self.__x_min = None
+
         self.__func = self.__create_func(difficulty)
         self.__y_min, self.__x_min = self.__conmeo()
+        print("dasdasads")
 
     def val(self, x):
         plat_func, plat_derived_func = self.__func
@@ -33,17 +35,12 @@ class Ham_so:
         return product_of_two.astype(float)
 
     def __create_func(self, difficulty):
-        coef_derived = [[1, random.randint(0, 4)]
-                        for _ in range(5)]
-        # coef_derived = [[random.randint(-5, 5), random.randint(-100*pow(self.__difficulty, 2), 100*pow(self.__difficulty, 2))]
-        #                 for _ in range(random.randrange(self.__difficulty*2+1))]
-        self.__meomeo = np.array([-i[1]/i[0] for i in coef_derived])
+
+        coef_derived = [[1, random.uniform(-100000, 100000)]
+                        for _ in range(random.randint(difficulty-1, difficulty+1)*2+1)]
+        self.__meomeo = np.array([-i[1] for i in coef_derived])
         plat_derived_func = self.__ConGaMaiDau(coef_derived)
         plat_func = self.__ConChoCon(plat_derived_func)
-
-        print(coef_derived)
-        print(plat_derived_func)
-        print(plat_func)
 
         return np.array([plat_func, plat_derived_func])
 
@@ -75,11 +72,17 @@ class Ham_so:
             return True
         return False
 
-    def show_result(self):
+    def show_min(self):
 
-        print(np.array([self.__y_min, self.__x_min]))
-        return np.array([self.__y_min, self.__x_min])
+        print([self.__y_min, self.__x_min])
+        exit(0)
+
+    def checkError(self):
+        try:
+            if self.__difficulty < 1 or self.__difficulty != int(self.__difficulty):
+                raise ValueError
+        except (ValueError, TypeError):
+            print("--Difficulty must be a positive integer--")
+            exit(1)
 
 
-a = Ham_so()
-a.show_result()
