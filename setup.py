@@ -4,7 +4,7 @@ from meomeo import __version__
 
 setup(
     name='meomeo',
-    version=__version__,
+    version=1.1,
 
     url='https://github.com/MinhLaConMeoDay/Tu-Ban',
     author='NhungChuMeoCon',
