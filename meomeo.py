@@ -1,4 +1,4 @@
-__version__ = 1.1
+__version__ = 1.2
 import numpy as np
 import random
 # from typing import
@@ -10,12 +10,13 @@ class Ham_so:
 
         self.__meomeo = None
         self.__difficulty = difficulty
+        self.checkError()
 
         self.__func = self.__create_func(difficulty)
         self.__y_min, self.__x_min = self.__conmeo()
-        print("dasdasads")
 
     def val(self, x):
+
         plat_func, plat_derived_func = self.__func
         plat_func_x = np.array([pow(x, i)
                                for i in range(len(plat_func)-1, -1, -1)])
@@ -26,12 +27,14 @@ class Ham_so:
         return plat_func_y, plat_derived_func_y
 
     def __ConMeoDeThuong(self, p1, p2):
+
         ConGa = p2+[0]*(len(p1)-1)
         col = len(ConGa)
         row = len(p1)
         arr = np.array((ConGa+[0])*(row-1)+p2)
         matrix = arr.reshape(row, col)
         product_of_two = np.array(p1) @ matrix
+
         return product_of_two.astype(float)
 
     def __create_func(self, difficulty):
@@ -42,7 +45,7 @@ class Ham_so:
         plat_derived_func = self.__ConGaMaiDau(coef_derived)
         plat_func = self.__ConChoCon(plat_derived_func)
 
-        return np.array([plat_func, plat_derived_func])
+        return (plat_func, plat_derived_func)
 
     def __ConChoCon(self, coef_derived):
         coef_plat = np.copy(coef_derived)
@@ -50,12 +53,11 @@ class Ham_so:
             coef_plat[-i] /= i
         coef_plat = np.concatenate(
             (coef_plat, [random.randint(-20, 20)]))
+
         return coef_plat
 
     def __ConGaMaiDau(self, coef_express):
-
         conmeo = np.array([1])
-
         for factor in coef_express:
             conmeo = self.__ConMeoDeThuong(
                 conmeo, factor)
@@ -68,8 +70,11 @@ class Ham_so:
         return value_Y[index_Min], self.__meomeo[index_Min]
 
     def check(self, x):
+
         if abs(self.val(x)[0] - self.__y_min) <= 2 * self.__difficulty:
+
             return True
+
         return False
 
     def show_min(self):
@@ -84,5 +89,3 @@ class Ham_so:
         except (ValueError, TypeError):
             print("--Difficulty must be a positive integer--")
             exit(1)
-
-
